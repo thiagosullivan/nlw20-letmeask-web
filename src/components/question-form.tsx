@@ -18,6 +18,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Textarea } from '@/components/ui/textarea';
+import { useCreateQuestion } from '@/http/use-create-question';
 
 // import { useCreateQuestion } from '@/http/use-create-question'
 
@@ -37,7 +38,7 @@ interface QuestionFormProps {
 }
 
 export function QuestionForm({ roomId }: QuestionFormProps) {
-  // const { mutateAsync: createQuestion } = useCreateQuestion(roomId)
+  const { mutateAsync: createQuestion } = useCreateQuestion(roomId);
 
   const form = useForm<CreateQuestionFormData>({
     resolver: zodResolver(createQuestionSchema),
@@ -47,7 +48,7 @@ export function QuestionForm({ roomId }: QuestionFormProps) {
   });
 
   async function handleCreateQuestion(data: CreateQuestionFormData) {
-    // await createQuestion(data)
+    await createQuestion(data);
   }
 
   const { isSubmitting } = form.formState;
